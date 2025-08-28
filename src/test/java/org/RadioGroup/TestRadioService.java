@@ -247,4 +247,72 @@ public class TestRadioService {
 
         Assertions.assertEquals( exp, act );
     }
+
+    // Тесты конструкторов:
+
+    @Test
+    public void testSetMaxQuantityStationByConstr() {
+        RadioService newrad = new RadioService( 30 );
+
+        int exp = 30;
+        int act = newrad.getMaxQuantityStation();
+
+        Assertions.assertEquals( exp, act);
+    }
+
+    @Test
+    public void testSetMaxStationByConstr() {
+        RadioService newrad = new RadioService( 30 );
+
+        int exp = 29;
+        int act = newrad.getMaxStation();
+
+        Assertions.assertEquals( exp, act);
+    }
+
+    @Test
+    public void testNextStationByConstrOverMaxStation() {
+        RadioService newrad = new RadioService( 30 );
+        newrad.setNewStation(29);
+        newrad.setNextStation();
+
+        int exp = 0;
+        int act = newrad.getCurrentStation();
+
+        Assertions.assertEquals( exp, act);
+    }
+
+    @Test
+    public void testPrevStationByConstrBelowMinStation() {
+        RadioService newrad = new RadioService( 30 );
+        newrad.setNewStation(0);
+        newrad.setPrevStation();
+
+        int exp = 29;
+        int act = newrad.getCurrentStation();
+
+        Assertions.assertEquals( exp, act);
+    }
+
+    @Test
+    public void testSetNewStationByConstrOverMaxStation() {
+        RadioService newrad = new RadioService( 30 );
+        newrad.setNewStation(30);
+
+        int exp = 0;
+        int act = newrad.getCurrentStation();
+
+        Assertions.assertEquals( exp, act);
+    }
+
+    @Test
+    public void testSetNewStationByConstrBelowMinStation() {
+        RadioService newrad = new RadioService( 30 );
+        newrad.setNewStation(-1);
+
+        int exp = 0;
+        int act = newrad.getCurrentStation();
+
+        Assertions.assertEquals( exp, act);
+    }
 }
