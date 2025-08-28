@@ -3,17 +3,45 @@ package org.RadioGroup;
 public class RadioService {
 
     private int currentStation;
-    private int maxStation = 9;
+    private int maxQuantityStation = 10;
+    private int maxStation = maxQuantityStation - 1;
     private int minStation = 0;
 
     private int currentVolume = 50;
     private int maxVolume = 100;
     private int minVolume = 0;
 
+    // Конструкторы:
+
+    public RadioService() {
+
+    }
+
+    public RadioService( int newMaxStationQuantity ) {
+
+        this.maxQuantityStation = newMaxStationQuantity;
+        this.maxStation = maxQuantityStation - 1;
+    }
+
 
     // Методы работы со станциями:
 
+    public int getMaxQuantityStation() {
+        return maxQuantityStation;
+    }
+
+    public int getMaxStation() {
+
+        return maxStation;
+    }
+
+    public int getMinStation() {
+
+        return minStation;
+    }
+
     public int getCurrentStation() {
+
         return currentStation;
     }
 
@@ -27,14 +55,14 @@ public class RadioService {
     public void setNextStation() {
         currentStation++;
         if ( currentStation > maxStation ) {
-            currentStation = 0;
+            currentStation = minStation;
         }
     }
 
     public void setPrevStation() {
         currentStation--;
         if ( currentStation < minStation ) {
-            currentStation = 9;
+            currentStation = maxStation;
         }
     }
 
